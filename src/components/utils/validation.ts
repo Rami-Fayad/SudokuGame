@@ -1,7 +1,7 @@
 import { Board } from '../../type'
 
 // Check if a value can be placed at a specific position
-export const isValidPlacement = (board: Board, row: number, col: number, num: number): boolean => {
+export const isValidPlacement = (board: Board, row: number, col: number, num: number | null): boolean => {
     // Check row
     for (let c = 0; c < 9; c++) {
         if (c !== col && board[row][c].value === num) { // Exclude the cell itself
