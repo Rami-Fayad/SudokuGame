@@ -1,0 +1,82 @@
+
+/* Thicker borders for 3x3 blocks */
+
+/* Left border of each 3x3 block column */
+/* .cell-input:nth-child(3n + 1) {
+  border-left: 2px solid #000;
+} */
+
+/* Right border of the last column in each 3x3 block */
+/* .cell-input:nth-child(3n) {
+  border-right: 2px solid #000;
+} */
+
+/* Top border of each 3x3 block row */
+/* .cell-input:nth-of-type(n+1):nth-of-type(-n+9),
+.cell-input:nth-of-type(n+28):nth-of-type(-n+36),
+.cell-input:nth-of-type(n+55):nth-of-type(-n+63) {
+  border-top: 2px solid #000;
+} */
+
+/* Bottom border of each 3x3 block row */
+/* .cell-input:nth-of-type(n+19):nth-of-type(-n+27),
+.cell-input:nth-of-type(n+46):nth-of-type(-n+54),
+.cell-input:nth-of-type(n+73):nth-of-type(-n+81) {
+  border-bottom: 2px solid #000;
+} */
+
+.cell-input {
+  width: 100%; 
+  height: 100%;
+  text-align: center;
+  font-size: 16px; 
+  border: 2px solid #444; 
+  border-radius: 8px; 
+  background-color: #1e1e1e; 
+  color: #fff; 
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.cell-input.editable {
+  background-color: #2c3e50; 
+  border: 2px solid #3498db; 
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.8); 
+  transform: scale(1.05); 
+}
+
+.cell-input.not-editable {
+  background-color: #14191d; 
+}
+
+
+.cell-input.conflict {
+  background-color: #ff4d4d; 
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); 
+}
+
+
+.cell-input.editable:focus {
+  outline: none; 
+  box-shadow: 0 0 10px rgba(52, 152, 219, 1); 
+  background-color: #2980b9; 
+}
+
+
+
+@media (max-width: 600px) {
+  .cell-input {
+    font-size: 14px; 
+    padding: 10px; 
+    width: 35px; 
+    height: 35px; 
+  }
+}
+@media (max-width: 365px) {
+  .cell-input {
+    font-size: 10px; 
+    padding: 5px; 
+    width: 28px; 
+    height: 28px; 
+  }
+}

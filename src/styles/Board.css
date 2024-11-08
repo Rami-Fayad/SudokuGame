@@ -1,0 +1,38 @@
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 50px); 
+  grid-template-rows: repeat(9, 50px); 
+  gap: 2px; 
+  justify-content: center;
+  margin: 20px auto;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px; 
+  box-shadow: 0 0 30px rgba(52, 152, 219, 0.8); 
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.sudoku-board:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 1); 
+}
+
+.sudoku-board .cell-input:nth-child(odd) {
+  border-right: 2px solid #2980b9; 
+}
+.sudoku-board .cell-input:nth-child(even) {
+  border-bottom: 2px solid #2980b9; 
+}
+
+
+.sudoku-board {
+  border: 4px solid #2980b9; 
+}
+
+@media (max-width: 600px) {
+  .sudoku-board {
+    grid-template-columns: repeat(9, 1fr); 
+    grid-template-rows: repeat(9, 1fr); 
+    gap: 0px; 
+  }
+}

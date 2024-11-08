@@ -1,0 +1,98 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, #1a1a2e, #16213e, #0f3460); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1); 
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px #00aaff; 
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    color: #e0e0e0; 
+    animation: slideDown 0.4s ease;
+    backdrop-filter: blur(10px); 
+}
+.modal-logo {
+    max-width: 120px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease;
+}
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    color: #00aaff; 
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+.difficulty-buttons {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    background: #0077cc; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: #005fa3;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.close-button {
+    background: #ff4f4f;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.close-button:hover {
+    background: #e04646;
+}
