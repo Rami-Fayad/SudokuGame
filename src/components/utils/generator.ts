@@ -1,5 +1,5 @@
 
-import { Board, Cell } from '../../type';
+import { Board } from '../../type';
 
 // Helper function to check if a number placement is safe
 export const isSafe = (board: Board, row: number, col: number, num: number): boolean => {

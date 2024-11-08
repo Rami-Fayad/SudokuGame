@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import SudokuBoard from './components/Board';
 import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CS
-import { Board as BoardType, Cell } from './type';
+import { Board as BoardType } from './type';
 import { isValidPlacement ,validateBoard as validateBoardUtil } from './components/utils/validation';
 import { generateCompleteBoard } from './components/utils/generator'; 
 import Modal from './components/DifficultyModal';
