@@ -3,7 +3,7 @@ import React from 'react';
 import { Board as BoardType } from '../type';
 import CellComponent from './CellComponent';
 import '../styles/Board.css';
-import  {isValidPlacement} from './utils/validation'
+import { isValidPlacement} from './utils/validation'
 
 interface BoardProps {
   board: BoardType;
@@ -16,7 +16,6 @@ const SudokuBoard: React.FC<BoardProps> = ({ board, onCellChange }) => {
         if (value === null) return false;
         return !isValidPlacement(board, row, col, value);
       };
-      
   return (
     <div className='sudoku-board'>
       {board.map((row, rowIndex) =>

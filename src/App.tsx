@@ -1,9 +1,7 @@
-
-// src/App.tsx
 import React, { useState, useEffect } from 'react';
 import SudokuBoard from './components/Board';
 import { toast,ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CS
+import 'react-toastify/dist/ReactToastify.css'; 
 import { Board as BoardType } from './type';
 import { isValidPlacement ,validateBoard as validateBoardUtil } from './components/utils/validation';
 import { generateCompleteBoard } from './components/utils/generator'; 
@@ -11,66 +9,7 @@ import Modal from './components/DifficultyModal';
 import { solveIncompleteBoard } from './components/utils/solver';
 import { saveGameToLocalStorage, loadGameFromLocalStorage } from './components/utils/storageUtils'; // Import the storage functio
 import './App.css';
-
-const createInitialBoard = (): BoardType => {
-  return Array(9)
-    .fill(null)
-    .map(() =>
-      Array(9).fill(null).map(() => ({
-        value: null,
-        editable: true,
-      }))
-    );
-};
-
-const removeCellsForPuzzle = (completeBoard: BoardType, difficulty: 'easy' | 'medium' | 'hard'): BoardType => {
-  let cellsToRemove = 0;
-
-  
-  switch (difficulty) {
-    case 'easy':
-      cellsToRemove = 35; 
-      break;
-    case 'medium':
-      cellsToRemove = 45;
-      break;
-    case 'hard':
-      cellsToRemove = 55;
-      break;
-  }
-
-  
-  const newBoard = completeBoard.map(row => row.map(cell => ({ ...cell })));
-
-  
-  for (let i = 0; i < cellsToRemove; i++) {
-    let row: number;
-    let col: number;
-
-   
-    do {
-      row = Math.floor(Math.random() * 9);
-      col = Math.floor(Math.random() * 9);
-    } while (newBoard[row][col].value === null || !newBoard[row][col].editable); 
-
-    
-    newBoard[row][col].value = null; 
-    newBoard[row][col].editable = true; // Set the cell as non-editable
-  }
-
-  
-  newBoard.forEach(row => 
-    row.forEach(cell => {
-      if (cell.value !== null) { // Remaining filled cells
-        cell.editable = false; // Mark as editable
-      } else {
-        cell.editable = true; 
-      }
-    })
-  );
-
-  return newBoard;
-};
+import { createInitialBoard, removeCellsForPuzzle} from "../src/components/utils/boardUtils"
 
 const App: React.FC = () => {
   const [board, setBoard] = useState<BoardType>(createInitialBoard());
@@ -159,6 +98,36 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
   generatePuzzle(selectedDifficulty); 
   setIsModalOpen(false); 
 };
+const handleHint = () => {
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      if (board[row][col].value === null && board[row][col].editable) {
+        
+        for (let num = 1; num <= 9; num++) {
+          if (isValidPlacement(board, row, col, num)) {
+            const updatedBoard = board.map((r, rowIndex) =>
+              r.map((cell, colIndex) => {
+                if (rowIndex === row && colIndex === col) {
+                  return { ...cell, value: num };  
+                }
+                return cell;
+              })
+            );
+
+            setBoard(updatedBoard);
+            saveGameToLocalStorage(updatedBoard, difficulty); 
+            toast.info(`Hint: Try ${num} at (${row + 1}, ${col + 1})`, { autoClose: 3000 });
+            return;  
+          }
+        }
+        toast.error("No valid numbers found for hint!");
+        return;
+      }
+    }
+  }
+  toast.info("No empty cells left for hints!");
+};
+
   return (
     
     <div  className='game'>
@@ -175,6 +144,7 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       <button onClick={()=>setIsModalOpen(true)}>Generate New Puzzle</button> {/* New button */}
       <button onClick={resetGame}>Reset </button> {/* New button */}
       <button onClick={handleSolve}>Solve</button> {/* New Solve button */}
+      <button onClick={handleHint}>Hint</button> {/* Add the Hint button */}
       </div>
     </div>
   );

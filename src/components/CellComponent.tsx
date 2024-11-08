@@ -9,6 +9,7 @@ interface CellProps {
   cell: Cell;
   onChange: (row: number, col: number, value: number | null) => void;
   hasConflict?: boolean; 
+  
 }
 
 const CellComponent: React.FC<CellProps> = ({ row, col, cell, onChange, hasConflict }) => {
