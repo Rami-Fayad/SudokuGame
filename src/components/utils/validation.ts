@@ -1,17 +1,16 @@
 import { Board } from '../../type'
 
-// Check if a value can be placed at a specific position
 export const isValidPlacement = (board: Board, row: number, col: number, num: number | null): boolean => {
     // Check row
     for (let c = 0; c < 9; c++) {
-        if (c !== col && board[row][c].value === num) { // Exclude the cell itself
+        if (c !== col && board[row][c].value === num) { 
             return false;
         }
     }
 
     // Check column
     for (let r = 0; r < 9; r++) {
-        if (r !== row && board[r][col].value === num) { // Exclude the cell itself
+        if (r !== row && board[r][col].value === num) { 
             return false;
         }
     }
@@ -21,7 +20,7 @@ export const isValidPlacement = (board: Board, row: number, col: number, num: nu
     const startCol = Math.floor(col / 3) * 3;
     for (let r = startRow; r < startRow + 3; r++) {
         for (let c = startCol; c < startCol + 3; c++) {
-            if ((r !== row || c !== col) && board[r][c].value === num) { // Exclude the cell itself
+            if ((r !== row || c !== col) && board[r][c].value === num) { 
                 return false;
             }
         }

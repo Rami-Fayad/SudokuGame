@@ -24,7 +24,49 @@ h1 {
   font-family: 'Orbitron', sans-serif;
   text-align: center;
   letter-spacing: 2px;
- /* Neon glow */
+
+}
+
+.btn button {
+  padding: 8px 16px;
+  font-size: 1em;
+  color: #ecf0f1;
+  background-color: #0f3460;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 5px;
+  box-shadow: 0 0 10px rgba(0, 241, 255, 0.5), 0 0 20px rgba(0, 241, 255, 0.3);
+}
+
+/* Hover and Active State */
+.btn button:hover {
+  background-color: #16213e;
+  box-shadow: 0 0 15px rgba(0, 241, 255, 0.7), 0 0 30px rgba(0, 241, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.btn button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 5px rgba(0, 241, 255, 0.7);
+}
+
+
+@media (max-width: 600px) {
+  .btn button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+}
+
+
+@media (max-width: 365px) {
+  .btn button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    margin: 4px;
+  }
 }
 
 /* Neon Button */
@@ -42,15 +84,8 @@ h1 {
     font-size: 2em; /* Smaller title */
   }
 
-  .btn button {
-    padding: 10px 20px;
-    font-size: 1em;
-  }
+  
 
- 
-  .btn {
-    margin-bottom: 20px;
-  }
 }
 
 @media (max-width: 365px) {
@@ -68,8 +103,4 @@ h1 {
     margin-bottom: 10px;
   }
 
-  .btn button {
-    padding: 6px 12px; 
-    font-size: 0.9em; 
-  }
 }

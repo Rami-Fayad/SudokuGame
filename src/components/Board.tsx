@@ -16,7 +16,9 @@ const SudokuBoard: React.FC<BoardProps> = ({ board, onCellChange }) => {
         if (value === null) return false;
         return !isValidPlacement(board, row, col, value);
       };
+      
   return (
+    
     <div className='sudoku-board'>
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => (

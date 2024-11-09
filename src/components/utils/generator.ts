@@ -1,4 +1,3 @@
-
 import { Board } from '../../type';
 
 // Helper function to check if a number placement is safe
@@ -40,7 +39,6 @@ const fillBoard = (board: Board): boolean => {
 // Helper function to shuffle numbers
 const shuffle = (arr: number[]): number[] => arr.sort(() => Math.random() - 0.5);
 
-// Generate a fully solved Sudoku board
 export const generateCompleteBoard = (): Board => {
   const board: Board = Array.from({ length: 9 }, () =>
     Array.from({ length: 9 }, () => ({ value: null, editable: true }))
