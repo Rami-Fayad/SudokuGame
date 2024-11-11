@@ -1,0 +1,53 @@
+.image-uploader {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .upload-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+  }
+  
+  .upload-button:hover {
+    background-color: #45a049;
+  }
+  
+  .upload-button.processing {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .progress-container {
+    width: 200px;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-container span {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  }
+  
+  .hidden {
+    display: none;
+  }
