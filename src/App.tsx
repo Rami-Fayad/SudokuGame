@@ -44,18 +44,18 @@ const App: React.FC = () => {
   const handleNumbersRecognized = (numbers: (number | null)[]) => {
     const updatedBoard = board.map((row, rowIndex) =>
       row.map((cell, colIndex) => {
-        const index = rowIndex * 9 + colIndex; // Calculate the index in the flat array
+        const index = rowIndex * 9 + colIndex;
         const value = numbers[index];
         return { 
           ...cell, 
           value: value || null, 
-          editable: value === null // Make cells editable only if the value is null
+          editable: value === null 
         };
       })
     );
     setBoard(updatedBoard);
-    toast.success("Numbers recognized and placed on the board!", { autoClose: 3000 });
   };
+  
   
   
 
@@ -79,10 +79,11 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
 
 
   return (
-    
+    <div>
+    <h1>Sudoku Game</h1>
     <div  className='game'>
         <ToastContainer theme='dark' /> 
-      <h1>Sudoku Game</h1>
+      
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -93,7 +94,7 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
           onClose={() => setIsSuccessModalOpen(false)}
           
         />
-        <ImageUploader onNumbersRecognized={handleNumbersRecognized} />
+       
       <SudokuBoard board={board} onCellChange={handleCellChange} />
       
       <div className='btn'>
@@ -105,6 +106,8 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       <button onClick={handleHint}>Hint</button> {/* Add the Hint button */}
       
       </div>
+      <ImageUploader onNumbersRecognized={handleNumbersRecognized} />
+    </div>
     </div>
   );
 };

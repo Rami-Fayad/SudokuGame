@@ -1,56 +1,106 @@
 import React, { useState } from 'react';
 import Tesseract from 'tesseract.js';
+import { toast } from 'react-toastify';
+import Spinner from './Spinner';
 
 interface ImageUploaderProps {
-  onNumbersRecognized: (numbers: (number | null)[]) => void; // Callback to pass recognized numbers
+  onNumbersRecognized: (numbers: (number | null)[]) => void;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ onNumbersRecognized }) => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+
+  const processCellImage = async (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, x: number, y: number, size: number): Promise<string> => {
+    const cellCanvas = document.createElement('canvas');
+    const cellCtx = cellCanvas.getContext('2d');
+    cellCanvas.width = size;
+    cellCanvas.height = size;
+
+    cellCtx?.drawImage(canvas, x, y, size, size, 0, 0, size, size);
+
+    // Convert to grayscale and apply binarization
+    const cellImageData = cellCtx?.getImageData(0, 0, size, size);
+    const data = cellImageData?.data;
+
+    if (data) {
+      for (let i = 0; i < data.length; i += 4) {
+        const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+        const threshold = avg > 128 ? 255 : 0;
+        data[i] = data[i + 1] = data[i + 2] = threshold;
+      }
+      cellCtx?.putImageData(cellImageData, 0, 0);
+    }
+
+    return cellCanvas.toDataURL();
+  };
+
+  const preprocessAndRecognizeCells = async (file: File) => {
+    return new Promise<number[]>((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = async () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 550;
+        canvas.height = 550;
+        ctx?.drawImage(img, 0, 0, 550, 550);
+
+        const cellSize = 550 / 9;
+        const recognizedNumbers: (number | null)[] = Array(81).fill(null);
+
+        for (let row = 0; row < 9; row++) {
+          for (let col = 0; col < 9; col++) {
+            const cellImage = await processCellImage(canvas, ctx!, col * cellSize, row * cellSize, cellSize);
+            
+            try {
+              const result = await Tesseract.recognize(cellImage, 'eng', {
+                tessedit_char_whitelist: '123456789',
+                tessedit_pageseg_mode: Tesseract.PSM.SINGLE_CHAR, // Focus on single character
+              });
+
+              const number = parseInt(result.data.text.trim(), 10);
+              if (!isNaN(number) && number >= 1 && number <= 9) {
+                recognizedNumbers[row * 9 + col] = number;
+              }
+            } catch (error) {
+              console.error("Error recognizing number in cell:", error);
+            }
+          }
+        }
+
+        resolve(recognizedNumbers);
+      };
+      img.onerror = (error) => reject(error);
+    });
+  };
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setLoading(true);
-      const imageUrl = URL.createObjectURL(file);
-      
-      // Use Tesseract.js to recognize text from the image
-      const result = await Tesseract.recognize(imageUrl, 'eng', {
-        logger: (m) => console.log(m), // Optional: log progress
-      });
-      
-      // Extract recognized numbers and their positions
-      const recognizedNumbers: (number | null)[] = Array(81).fill(null); // Initialize an empty board
-      const text = result.data.text;
-      const words = result.data.words; // Get words with their bounding boxes
 
-      // Map recognized numbers to their positions
-      words.forEach((word) => {
-        const number = parseInt(word.text, 10);
-        if (!isNaN(number) && number >= 1 && number <= 9) {
-          const x = Math.floor((word.bbox.x0 + word.bbox.x1) / 2);
-          const y = Math.floor((word.bbox.y0 + word.bbox.y1) / 2);
-          const rowIndex = Math.floor(y / (558 / 9)); // Calculate row index
-          const colIndex = Math.floor(x / (571 / 9)); // Calculate column index
-          
-          if (rowIndex < 9 && colIndex < 9) {
-            recognizedNumbers[rowIndex * 9 + colIndex] = number; // Place number in the correct position
-          }
-        }
-      });
-
-      // Log the recognized numbers for debugging
-      console.log("Recognized Numbers:", recognizedNumbers);
-
-      onNumbersRecognized(recognizedNumbers); // Pass recognized numbers to the parent
-      setLoading(false);
+      try {
+        const recognizedNumbers = await preprocessAndRecognizeCells(file);
+        onNumbersRecognized(recognizedNumbers);
+        toast.success("Numbers recognized and placed on the board!", { autoClose: 3000 });
+      } catch (error) {
+        console.error("Error processing image:", error);
+        toast.error("Failed to recognize numbers from the image.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
-      {loading && <p>Recognizing numbers...</p>}
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        onClick={(e) => { (e.target as HTMLInputElement).value = ''; }}
+      />
+      {loading && <Spinner />}
     </div>
   );
 };
