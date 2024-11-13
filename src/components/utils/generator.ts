@@ -1,5 +1,6 @@
 import { Board } from '../../type';
 import {isValidPlacement} from './validation';
+import { createInitialBoard } from './boardUtils';
 
 // Helper function to check if a number placement is safe
 // export const isSafe = (board: Board, row: number, col: number, num: number): boolean => {
@@ -41,9 +42,7 @@ const fillBoard = (board: Board): boolean => {
 const shuffle = (arr: number[]): number[] => arr.sort(() => Math.random() - 0.5);
 
 export const generateCompleteBoard = (): Board => {
-  const board: Board = Array.from({ length: 9 }, () =>
-    Array.from({ length: 9 }, () => ({ value: null, editable: true }))
-  );
+  const board = createInitialBoard();
   fillBoard(board);
   return board;
 };
