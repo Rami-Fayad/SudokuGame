@@ -1,22 +1,28 @@
+/* Container for image uploader */
 .image-uploader {
     margin: 20px 0;
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center; /* Ensures vertical centering */
+    flex-direction: column; /* Aligns items in a column */
   }
   
+  /* Upload button styling */
   .upload-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
+    padding: 12px 25px;
+    background-color: #3c9b5d; /* Slightly muted green for better readability */
     color: white;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 15px; /* Adds space below the button */
+    font-size: 16px;
   }
   
   .upload-button:hover {
-    background-color: #45a049;
+    background-color: #357a44; /* Darker green on hover */
+    transform: scale(1.05); /* Button gets slightly bigger on hover */
   }
   
   .upload-button.processing {
@@ -24,10 +30,12 @@
     cursor: not-allowed;
   }
   
+  /* Progress container for upload */
   .progress-container {
-    width: 200px;
+    width: 80%; /* Makes it responsive */
+    max-width: 300px;
     height: 20px;
-    background-color: #f0f0f0;
+    background-color: #190a67; /* Lighter background for contrast */
     border-radius: 10px;
     overflow: hidden;
     position: relative;
@@ -35,8 +43,8 @@
   
   .progress-bar {
     height: 100%;
-    background-color: #4CAF50;
-    transition: width 0.3s ease;
+    background-color: #3c9b5d; /* Matches the button color */
+    transition: width 0.3s ease-in-out;
   }
   
   .progress-container span {
@@ -45,9 +53,12 @@
     text-align: center;
     line-height: 20px;
     color: white;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   }
   
+  /* Hide elements (such as progress bar) when needed */
   .hidden {
     display: none;
   }
+  

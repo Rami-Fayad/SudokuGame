@@ -67,28 +67,19 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
   };
 
   const handleHint = () => {
-    // Validate if the board is in a valid state before proceeding
     if (!validateBoardUtil(board)) {
       toast.error("The board has conflicts! Please correct them before taking a hint.", { autoClose: 3000 });
       return;
     }
-  
-    // Create a copy of the board to work with (we'll modify this copy)
     const boardCopy = board.map(row => row.map(cell => ({ ...cell })));
-  
-    // Loop through the board and find the first empty cell that is editable
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         if (board[row][col].value === null && board[row][col].editable) {
   
-          // Try placing each number from 1 to 9 to check if it is valid and solves the board
           for (let num = 1; num <= 9; num++) {
             if (isValidPlacement(boardCopy, row, col, num)) {
-              
-              // Place the number in the copied board and check if it's solvable
               boardCopy[row][col].value = num;
-  
-              // Check if the board is still solvable after placing the number
+
               if (solveIncompleteBoard(boardCopy)) {
                 // If solvable, update the actual board and show the hint
                 const updatedBoard = board.map((r, rowIndex) =>
@@ -107,8 +98,6 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
                     setIsSuccessModalOpen(true);
                 return;  // Stop after providing one valid hint
               }
-  
-              // If placing this number doesn't solve the puzzle, reset it
               boardCopy[row][col].value = null;
             }
           }
@@ -116,12 +105,12 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
       }
     }
   
-    // If no valid hints are found (should not happen if the puzzle is solvable)
     toast.error("No valid hints found!");
   };
   
+
+
   const isBoardSolved = (board: BoardType) => {
-    // Check that every cell is filled (no `null` values)
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         if (board[row][col].value === null) {
@@ -129,8 +118,6 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
         }
       }
     }
-  
-   
     return validateBoardUtil(board);
   };
 

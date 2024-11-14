@@ -99,14 +99,14 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       
       <div className='btn'>
         
-      <button onClick={validateBoard}>Check Solution</button> 
-      <button onClick={()=>setIsModalOpen(true)}>Generate New Puzzle</button> {/* New button */}
+      <button onClick={validateBoard}>Check </button> 
+      <button onClick={()=>setIsModalOpen(true)}> New Puzzle</button> {/* New button */}
       <button onClick={resetGame}>Reset </button> {/* New button */}
       <button onClick={handleSolve}>Solve</button> {/* New Solve button */}
       <button onClick={handleHint}>Hint</button> {/* Add the Hint button */}
-      
-      </div>
       <ImageUploader onNumbersRecognized={handleNumbersRecognized} />
+      </div>
+      
     </div>
     </div>
   );

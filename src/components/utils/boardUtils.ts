@@ -1,6 +1,5 @@
 import { Board , } from "../../type"; 
 
-
 export const createInitialBoard = (): Board => {
   return Array(9)
     .fill(null)
@@ -26,7 +25,6 @@ export const removeCellsForPuzzle = (completeBoard: Board, difficulty: 'easy' | 
       cellsToRemove = 55;
       break;
   }
-
   const newBoard = completeBoard.map(row => row.map(cell => ({ ...cell })));
 
   for (let i = 0; i < cellsToRemove; i++) {
