@@ -1,64 +1,59 @@
 /* Container for image uploader */
 .image-uploader {
-    margin: 20px 0;
-    width: 100%;
+    margin: 10px 0;
     display: flex;
     justify-content: center;
-    align-items: center; /* Ensures vertical centering */
-    flex-direction: column; /* Aligns items in a column */
-  }
-  
-  /* Upload button styling */
-  .upload-button {
+    align-items: center;
+    flex-direction: column;
+    position: relative; /* Added for better spinner positioning */
+}
+
+/* Upload button styling */
+.upload-button {
     padding: 12px 25px;
-    background-color: #3c9b5d; /* Slightly muted green for better readability */
+    background-color: #1d2f5e; /* Matches game colors */
     color: white;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 15px; /* Adds space below the button */
+    margin-bottom: 15px;
     font-size: 16px;
-  }
-  
-  .upload-button:hover {
-    background-color: #357a44; /* Darker green on hover */
-    transform: scale(1.05); /* Button gets slightly bigger on hover */
-  }
-  
-  .upload-button.processing {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  /* Progress container for upload */
-  .progress-container {
-    width: 80%; /* Makes it responsive */
+    box-shadow: 0px 0px 10px rgba(29, 47, 94, 0.8); /* Neon-like glow */
+}
+
+.upload-button:hover {
+    background-color: #1a2b55;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(29, 47, 94, 1);
+}
+
+/* Progress bar styling */
+.progress-container {
+    width: 80%;
     max-width: 300px;
-    height: 20px;
-    background-color: #190a67; /* Lighter background for contrast */
+    height: 15px;
+    background-color: #0d1a45;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-  }
-  
-  .progress-bar {
+    margin-top: 10px;
+    box-shadow: 0px 0px 8px rgba(29, 47, 94, 0.8); /* Subtle glow effect */
+}
+
+.progress-bar {
     height: 100%;
-    background-color: #3c9b5d; /* Matches the button color */
+    background-color: #3c9b5d;
     transition: width 0.3s ease-in-out;
-  }
-  
-  .progress-container span {
+    box-shadow: 0px 0px 5px rgba(60, 155, 93, 0.8);
+}
+
+.progress-container span {
     position: absolute;
     width: 100%;
     text-align: center;
-    line-height: 20px;
+    line-height: 15px;
     color: white;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Hide elements (such as progress bar) when needed */
-  .hidden {
-    display: none;
-  }
-  
+}
+

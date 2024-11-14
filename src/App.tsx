@@ -105,9 +105,12 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       <button onClick={handleSolve}>Solve</button> {/* New Solve button */}
       <button onClick={handleHint}>Hint</button> {/* Add the Hint button */}
       <button onClick={() => setIsInstructionsModalOpen(true)}>Instructions</button> 
-      <ImageUploader onNumbersRecognized={handleNumbersRecognized} />
+     
       </div>
-      
+      <div className='image-uploader-container'>
+    <h3>Upload Sudoku Image</h3>
+    <ImageUploader onNumbersRecognized={handleNumbersRecognized} />
+  </div>
     </div>
     </div>
   );

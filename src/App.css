@@ -13,13 +13,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 0;
   padding: 20px;
 }
 
 h1 {
   color: #00f1ff;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 3em;
   font-family: 'Orbitron', sans-serif;
   text-align: center;
@@ -27,6 +27,14 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.image-uploader-container {
+    margin-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Light separator */
+    text-align: center;
+}
+.image-uploader-container h3{
+    color: #00f1ff;  
+}
 
 .btn button {
   padding: 8px 16px;
