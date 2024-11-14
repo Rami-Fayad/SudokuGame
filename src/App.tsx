@@ -8,11 +8,12 @@ import ImageUploader from './components/ImageUploader';
 import './App.css';
 import {useBoard} from '../hooks/useBoard';
 import ResultModal from './components/ResultModal';
-
+import InstructionsModal from './components/InstructionsModal';
 const App: React.FC = () => {
   
   const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true); 
+  const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState<boolean>(false); 
 
 
   const {
@@ -56,10 +57,6 @@ const App: React.FC = () => {
     setBoard(updatedBoard);
   };
   
-  
-  
-
- 
 const validateBoard = () => {
   
   const issolved = isBoardSolved(board);
@@ -94,7 +91,10 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
           onClose={() => setIsSuccessModalOpen(false)}
           
         />
-       
+       <InstructionsModal
+          isOpen={isInstructionsModalOpen}
+          onClose={() => setIsInstructionsModalOpen(false)}
+        />
       <SudokuBoard board={board} onCellChange={handleCellChange} />
       
       <div className='btn'>
@@ -104,6 +104,7 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       <button onClick={resetGame}>Reset </button> {/* New button */}
       <button onClick={handleSolve}>Solve</button> {/* New Solve button */}
       <button onClick={handleHint}>Hint</button> {/* Add the Hint button */}
+      <button onClick={() => setIsInstructionsModalOpen(true)}>Instructions</button> 
       <ImageUploader onNumbersRecognized={handleNumbersRecognized} />
       </div>
       
