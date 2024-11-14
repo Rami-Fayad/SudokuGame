@@ -61,6 +61,25 @@ h1 {
   box-shadow: 0 0 5px rgba(0, 241, 255, 0.7);
 }
 
+.navy-logo {
+  position: absolute;
+  top: 20px;  
+  left: 20px; 
+  width: 100px; 
+  height: auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px; 
+  z-index: 10;  
+}
+
+@media (max-width: 768px) {
+  .navy-logo {
+    width: 80px; 
+    top: 15px;
+    right: 15px;
+  }
+}
+
 
 @media (max-width: 600px) {
   .btn button {

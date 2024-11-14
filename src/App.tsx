@@ -9,7 +9,9 @@ import './App.css';
 import {useBoard} from '../hooks/useBoard';
 import ResultModal from './components/ResultModal';
 import InstructionsModal from './components/InstructionsModal';
-const App: React.FC = () => {
+import Buttons from './components/Buttons';
+
+ const App: React.FC = () => {
   
   const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true); 
@@ -66,6 +68,8 @@ const validateBoard = () => {
     setIsSuccessModalOpen(true);
   else
   toast.error('The solution is in correct or incomplete')
+  const audio = new Audio('./Wrong.wav') ;
+  audio.play();
 };
 
 const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') => {
@@ -77,9 +81,11 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
 
   return (
     <div>
-    <h1>Sudoku Game</h1>
+    <img src="./NavyBits Lebanon.png" alt="" className='navy-logo' />
     <div  className='game'>
-        <ToastContainer theme='dark' /> 
+    <h1>Sudoku Game</h1>
+
+    <ToastContainer theme='dark' /> 
       
       <Modal
         isOpen={isModalOpen}
@@ -89,24 +95,21 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       <ResultModal
         isopen={isSuccessModalOpen}
           onClose={() => setIsSuccessModalOpen(false)}
-          
-        />
+      />
        <InstructionsModal
           isOpen={isInstructionsModalOpen}
           onClose={() => setIsInstructionsModalOpen(false)}
         />
       <SudokuBoard board={board} onCellChange={handleCellChange} />
-      
-      <div className='btn'>
-        
-      <button onClick={validateBoard}>Check </button> 
-      <button onClick={()=>setIsModalOpen(true)}> New Puzzle</button> {/* New button */}
-      <button onClick={resetGame}>Reset </button> {/* New button */}
-      <button onClick={handleSolve}>Solve</button> {/* New Solve button */}
-      <button onClick={handleHint}>Hint</button> {/* Add the Hint button */}
-      <button onClick={() => setIsInstructionsModalOpen(true)}>Instructions</button> 
-     
-      </div>
+      <Buttons
+      oncheck = {validateBoard}
+      onnewpuzzle = {()=>setIsModalOpen(true)}
+      onreset = {resetGame}
+      onsolve = {handleSolve}
+      onhint = {handleHint}
+      onShowInstructions = {()=>setIsInstructionsModalOpen(true)}
+      />
+       
       <div className='image-uploader-container'>
     <h3>Upload Sudoku Image</h3>
     <ImageUploader onNumbersRecognized={handleNumbersRecognized} />

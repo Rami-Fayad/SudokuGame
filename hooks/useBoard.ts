@@ -5,6 +5,7 @@ import { generateCompleteBoard } from '../src/components/utils/generator';
 import { saveGameToLocalStorage } from '../src/components/utils/storageUtils';
 import { removeCellsForPuzzle ,createInitialBoard} from '../src/components/utils/boardUtils';
 import { solveIncompleteBoard } from '../src/components/utils/solver';
+
 import { toast } from 'react-toastify';
 
 export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
@@ -15,6 +16,8 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     
     if (value !== null && !isValidPlacement(board, row, col, value)) {
       toast.error("Invalid move!", { autoClose: 3000 });
+      const audio = new Audio('./Wrong.wav') ;
+      audio.play();
     }
     const updatedBoard = board.map((r, rowIndex) =>
       r.map((cell, colIndex) => {
@@ -33,6 +36,8 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
   const handleSolve = () => {
     if (!validateBoardUtil(board)) {
       toast.error("The board has conflicts! Please correct them before solving.", { autoClose: 3000 });
+      const audio = new Audio('./Wrong.wav') ;
+      audio.play();
       return;
     }
 
@@ -56,6 +61,8 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     setBoard(newBoard);
     saveGameToLocalStorage(newBoard, difficulty);
     toast.info("Game has been reset.", { autoClose: 2000 });
+    const audio = new Audio('./generate.wav') ;
+      audio.play();
   };
 
   const generatePuzzle = (selectedDifficulty: 'easy' | 'medium' | 'hard' = difficulty) => {
@@ -64,11 +71,15 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     setBoard(newBoard);
     saveGameToLocalStorage(newBoard, selectedDifficulty);
     toast.success("New puzzle generated!", { autoClose: 2000 });
+    const audio = new Audio('./generate.wav') ;
+      audio.play();
   };
 
   const handleHint = () => {
     if (!validateBoardUtil(board)) {
       toast.error("The board has conflicts! Please correct them before taking a hint.", { autoClose: 3000 });
+      const audio = new Audio('./Wrong.wav') ;
+      audio.play();
       return;
     }
     const boardCopy = board.map(row => row.map(cell => ({ ...cell })));
