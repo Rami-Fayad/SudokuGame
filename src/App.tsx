@@ -28,7 +28,9 @@ import Buttons from './components/Buttons';
     handleHint,
     isBoardSolved,
     isSuccessModalOpen,
-    setIsSuccessModalOpen
+    setIsSuccessModalOpen,
+   
+ 
     
   } = useBoard(difficulty);
 

@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
   const [board, setBoard] = useState<BoardType>(createInitialBoard());
   const [isSuccessModalOpen, setIsSuccessModalOpen] =useState<boolean>(false);
+  
 
   const handleCellChange = (row: number, col: number, value: number | null) => {
     
@@ -92,7 +93,6 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
               boardCopy[row][col].value = num;
 
               if (solveIncompleteBoard(boardCopy)) {
-                // If solvable, update the actual board and show the hint
                 const updatedBoard = board.map((r, rowIndex) =>
                   r.map((cell, colIndex) => {
                     if (rowIndex === row && colIndex === col) {
@@ -142,8 +142,7 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     handleHint,
     isBoardSolved,
     isSuccessModalOpen,
-    setIsSuccessModalOpen
-
+    setIsSuccessModalOpen,
   };
 };
 

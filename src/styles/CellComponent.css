@@ -1,24 +1,20 @@
 
-/* Thicker borders for 3x3 blocks */
-
-/* Left border of each 3x3 block column */
 /* .cell-input:nth-child(3n + 1) {
   border-left: 2px solid #000;
 } */
 
-/* Right border of the last column in each 3x3 block */
+
 /* .cell-input:nth-child(3n) {
   border-right: 2px solid #000;
 } */
 
-/* Top border of each 3x3 block row */
+
 /* .cell-input:nth-of-type(n+1):nth-of-type(-n+9),
 .cell-input:nth-of-type(n+28):nth-of-type(-n+36),
 .cell-input:nth-of-type(n+55):nth-of-type(-n+63) {
   border-top: 2px solid #000;
 } */
 
-/* Bottom border of each 3x3 block row */
 /* .cell-input:nth-of-type(n+19):nth-of-type(-n+27),
 .cell-input:nth-of-type(n+46):nth-of-type(-n+54),
 .cell-input:nth-of-type(n+73):nth-of-type(-n+81) {

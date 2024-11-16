@@ -26,6 +26,8 @@ const ResultModal:React.FC<SuccesModalProps> = ({isopen, onClose}) => {
       <img src={logo} alt="NavyBits Logo" className="modal-logo" />
         <h2>Congratulations!</h2>
         <p>You’ve successfully solved the puzzle!</p>
+      
+
         <button onClick={onClose}>Close</button>
       </div>
     </div>
