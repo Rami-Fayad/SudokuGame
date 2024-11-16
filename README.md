@@ -1,7 +1,7 @@
 
 # 🎲 **Sudoku Game Application**
 
-![Navy Bits Logo](./public/NavyBits%20Lebanon.png)
+![Navy Bits Logo](./public/readmeimage.png)
 
 
 ---
