@@ -6,10 +6,12 @@ onreset: () => void;
 onsolve: () => void;
 onhint : () => void;
 onShowInstructions : () => void;
-
+onclear: () =>void;
 }
 
-const Buttons : React.FC<Buttonprobs>  = ({oncheck , onnewpuzzle ,onreset , onsolve , onhint , onShowInstructions}) => {
+const Buttons : React.FC<Buttonprobs>  = ({oncheck , onnewpuzzle ,onreset , onsolve , onhint , onShowInstructions
+  , onclear
+}) => {
   return (
 
     <div className='btn'>
@@ -20,6 +22,7 @@ const Buttons : React.FC<Buttonprobs>  = ({oncheck , onnewpuzzle ,onreset , onso
     <button onClick={onsolve}>Solve</button> 
     <button onClick={onhint}>Hint</button> 
     <button onClick={onShowInstructions}>Instructions</button> 
+    <button onClick={onclear}>clear</button> 
     </div>
   )
 }

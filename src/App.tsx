@@ -29,8 +29,9 @@ import Buttons from './components/Buttons';
     isBoardSolved,
     isSuccessModalOpen,
     setIsSuccessModalOpen,
+    clearEditableCells,
    
- 
+    hintcount,
     
   } = useBoard(difficulty);
 
@@ -46,15 +47,15 @@ import Buttons from './components/Buttons';
     }
   }, []);
   
-  const handleNumbersRecognized = (numbers: (number | null)[]) => {
+  const handleNumbersRecognized = (numbers: number[]) => {
     const updatedBoard = board.map((row, rowIndex) =>
       row.map((cell, colIndex) => {
         const index = rowIndex * 9 + colIndex;
         const value = numbers[index];
-        return { 
-          ...cell, 
-          value: value || null, 
-          editable: value === null 
+        return {
+          ...cell,
+          value: value > 0 ? value : null, 
+          editable: true, 
         };
       })
     );
@@ -97,6 +98,7 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       <ResultModal
         isopen={isSuccessModalOpen}
           onClose={() => setIsSuccessModalOpen(false)}
+          hintCount ={hintcount}
       />
        <InstructionsModal
           isOpen={isInstructionsModalOpen}
@@ -110,6 +112,7 @@ const handleDifficultyChange = (selectedDifficulty: 'easy' | 'medium' | 'hard') 
       onsolve = {handleSolve}
       onhint = {handleHint}
       onShowInstructions = {()=>setIsInstructionsModalOpen(true)}
+      onclear = {clearEditableCells}
       />
        
       <div className='image-uploader-container'>

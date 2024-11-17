@@ -29,7 +29,7 @@ Key Features:
 ## 🛠️ **Technologies Used**
 
 - **Frontend**: React.js, TypeScript  
-- **State Management**: React hooks (`useState`, `useEffect`)  
+- **State Management**: React hooks (`useState`, `useEffect`,`useRef`)  
 - **Algorithmic Features**:  
   - **Puzzle Generation**: Backtracking algorithm to ensure solvability.  
   - **Hint & Solve**: Leveraged recursive algorithms for validation and solution.  

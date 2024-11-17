@@ -4,8 +4,9 @@ import { useEffect ,useRef } from 'react';
 interface SuccesModalProps {
     isopen:boolean,
     onClose:()=> void;
+    hintCount : number;
 }
-const ResultModal:React.FC<SuccesModalProps> = ({isopen, onClose}) => {
+const ResultModal:React.FC<SuccesModalProps> = ({isopen, onClose, hintCount}) => {
   const audioRef = useRef(new Audio('./winning-218995.mp3'));
 
     useEffect(() => {
@@ -26,7 +27,7 @@ const ResultModal:React.FC<SuccesModalProps> = ({isopen, onClose}) => {
       <img src={logo} alt="NavyBits Logo" className="modal-logo" />
         <h2>Congratulations!</h2>
         <p>You’ve successfully solved the puzzle!</p>
-      
+        <p>Hints used: {hintCount}</p>
 
         <button onClick={onClose}>Close</button>
       </div>

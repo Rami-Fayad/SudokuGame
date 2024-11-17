@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
   const [board, setBoard] = useState<BoardType>(createInitialBoard());
   const [isSuccessModalOpen, setIsSuccessModalOpen] =useState<boolean>(false);
-  
+  const [hintcount , sethintcount]=useState<number>(0);
 
   const handleCellChange = (row: number, col: number, value: number | null) => {
     
@@ -61,6 +61,7 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     const newBoard = removeCellsForPuzzle(completeBoard, difficulty);
     setBoard(newBoard);
     saveGameToLocalStorage(newBoard, difficulty);
+    sethintcount(0);
     toast.info("Game has been reset.", { autoClose: 2000 });
     const audio = new Audio('./generate.wav') ;
       audio.play();
@@ -71,11 +72,24 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     const newBoard = removeCellsForPuzzle(completeBoard, selectedDifficulty);
     setBoard(newBoard);
     saveGameToLocalStorage(newBoard, selectedDifficulty);
+    sethintcount(0);
     toast.success("New puzzle generated!", { autoClose: 2000 });
     const audio = new Audio('./generate.wav') ;
       audio.play();
   };
-
+  const clearEditableCells = () => {
+    const updatedBoard = board.map((row) =>
+      row.map((cell) => {
+        if (cell.editable) {
+          return { ...cell, value: null }; // Clear the editable cell's value
+        }
+        return cell;
+      })
+    );
+    setBoard(updatedBoard); // Update the board state
+    saveGameToLocalStorage(updatedBoard,difficulty );
+  };
+  
   const handleHint = () => {
     if (!validateBoardUtil(board)) {
       toast.error("The board has conflicts! Please correct them before taking a hint.", { autoClose: 3000 });
@@ -103,6 +117,7 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
                 );
   
                 setBoard(updatedBoard);
+                sethintcount(prevCount =>prevCount +1 );
                 saveGameToLocalStorage(updatedBoard, difficulty);
                 toast.info(`Hint: Try ${num} at (${row + 1}, ${col + 1})`, { autoClose: 3000 });
                 if (isBoardSolved(updatedBoard))
@@ -143,6 +158,11 @@ export const useBoard = (difficulty: 'easy' | 'medium' | 'hard') => {
     isBoardSolved,
     isSuccessModalOpen,
     setIsSuccessModalOpen,
+    sethintcount,
+    hintcount,
+    clearEditableCells
+
+
   };
 };
 
