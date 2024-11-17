@@ -22,7 +22,7 @@ Key Features:
 
 | **Game Interface** | **Success Modal** | **Instructions**|
 |---------------------|-------------------|  
-| ![Game Interface](./screenshots/game_interface.png) | ![Success Modal](./screenshots/success_modal.png) | ![Instructions Modal](./screenshots/instruction_modal.png) | 
+| ![Game Interface](./public/screenshots/game_interface.PNG) | ![Success Modal](./public/screenshots/success_modal.PNG) | ![Instructions Modal](./public/screenshots/instruction_modal.PNG) | 
 
 ---
 
