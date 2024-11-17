@@ -20,9 +20,9 @@ Key Features:
 
 ## 📸 **Screenshots**
 
-| **Game Interface** | **Success Modal** | **Instructions**|
-|---------------------|-------------------|  
-| ![Game Interface](./public/screenshots/game_interface.PNG) | ![Success Modal](./public/screenshots/success_modal.PNG) | ![Instructions Modal](./public/screenshots/instruction_modal.PNG) | 
+| **Game Interface** | **Success Modal** | **Instructions** |
+|---------------------|-------------------|------------------|  
+| ![Game Interface](./public/screenshots/game_interface.PNG) | ![Success Modal](./public/screenshots/success_modal.PNG) | ![Instructions Modal](./public/screenshots/instruction_modal.PNG) |
 
 ---
 
